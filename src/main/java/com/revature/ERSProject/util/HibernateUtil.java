@@ -6,7 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.revature.ERSProject.model.ErsUser;
+import com.revature.ERSProject.model.*;
 
 public class HibernateUtil {
 
@@ -15,6 +15,7 @@ public class HibernateUtil {
 	private static SessionFactory sessionFactory(String filename) {
 			Configuration config = new Configuration().configure(filename);
 			config.addAnnotatedClass(ErsUser.class);
+			config.addAnnotatedClass(UserRole.class);
 			ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 			
 			return config.buildSessionFactory(sr);
