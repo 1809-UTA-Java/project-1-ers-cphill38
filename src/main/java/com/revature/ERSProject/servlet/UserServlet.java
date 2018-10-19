@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 			req.getSession().setAttribute("user", user);
 			boolean isManager = rdao.isManager(user.getUserRoleId());
 			if(isManager==true)
-				req.getRequestDispatcher("manager-homepage.html").forward(req, resp);
+				req.getRequestDispatcher("/manager").forward(req, resp);
 			else
 				req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
 		}

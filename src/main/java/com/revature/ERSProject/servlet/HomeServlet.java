@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/manager")
-public class ManagerPageServlet extends HttpServlet {
+@WebServlet("/home")
+public class HomeServlet extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("manager-homepage.html").forward(req, resp);;
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("index.html").forward(req, resp);;
 	}
 
 }
