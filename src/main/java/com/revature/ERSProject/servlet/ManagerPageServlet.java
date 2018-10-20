@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/manager")
 public class ManagerPageServlet extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("manager-homepage.html").forward(req, resp);;
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println(req.getSession().getAttribute("user"));
+		req.getRequestDispatcher("manager-homepage.html").forward(req, resp);
 	}
 
 }

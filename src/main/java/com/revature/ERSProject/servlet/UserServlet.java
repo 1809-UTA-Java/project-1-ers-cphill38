@@ -26,11 +26,6 @@ public class UserServlet extends HttpServlet {
 		user = udao.getEmployeeByUsername(req.getParameter("username"));
 		
 		resp.setContentType("text/xml");
-		/*ObjectMapper om = new XmlMapper();
-		String obj = om.writeValueAsString(users);
-		PrintWriter pw = resp.getWriter();
-		pw.print(obj);
-		pw.close();*/
 		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -38,9 +33,11 @@ public class UserServlet extends HttpServlet {
 			req.getSession().setAttribute("user", user);
 			boolean isManager = rdao.isManager(user.getUserRoleId());
 			if(isManager==true)
-				req.getRequestDispatcher("/manager").forward(req, resp);
+				//req.getRequestDispatcher("/manager").forward(req, resp);
+				resp.sendRedirect("manager");
 			else
-				req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
+				resp.sendRedirect("employee");
+				//req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
 		}
 		else
 			System.out.println("Login Failed!");
