@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("index.html").forward(req, resp);;
+		System.out.println(req.getSession().getAttribute("user"));
+		req.getRequestDispatcher("index.html").forward(req, resp);
+		
 	}
 
 }
