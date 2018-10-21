@@ -19,15 +19,5 @@ public class EmployeePageServlet extends HttpServlet {
 		System.out.println(req.getSession().getAttribute("user"));
 		req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
 	}
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ErsUser user = (ErsUser) req.getSession().getAttribute("user");
-		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
-		pw.println("<h1>Your Info</h1><br>" + user.toString());		
-
-		//req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
-
-	}
 
 }
