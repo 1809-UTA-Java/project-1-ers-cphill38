@@ -19,5 +19,9 @@ public class ManagerPageServlet extends HttpServlet {
 		System.out.println(req.getSession().getAttribute("user"));
 		req.getRequestDispatcher("manager-homepage.html").forward(req, resp);
 	}
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
 
 }

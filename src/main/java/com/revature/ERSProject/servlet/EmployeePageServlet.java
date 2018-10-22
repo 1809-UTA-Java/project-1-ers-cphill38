@@ -19,5 +19,9 @@ public class EmployeePageServlet extends HttpServlet {
 		System.out.println(req.getSession().getAttribute("user"));
 		req.getRequestDispatcher("employee-homepage.html").forward(req, resp);
 	}
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
 
 }

@@ -103,24 +103,60 @@ public class ReimbursementsDao {
 		ReimburseType type = new ReimburseType();
 
 		
-		status.setId(33);
+		status.setId(4263);
 		status.setStatus("pending");	
-		type.setId(33);
+		type.setId(4263);
 		type.setType("general");
 		
-		request.setId(33);
+		request.setId(4263);
 		request.setAmount(amount);
 		request.setDes(desc);
 		request.setDateSub(new Date());
 		request.setIdAuthor(user.getId());
-		request.setIdStatus(33);
-		request.setIdType(33);
+		request.setIdStatus(4263);
+		request.setIdType(4263);
 		
 		session.save(status);
 		session.save(type);
 		session.save(request);
 		
 		session.getTransaction().commit();
+	}
+	
+	public void approveReimbursementRequest(ErsUser user, int requestId) {
+		
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		
+		Reimbursements request = (Reimbursements) session.load(Reimbursements.class, requestId);
+		ReimburseStatus status = (ReimburseStatus) session.load(ReimburseStatus.class, requestId);		
+		
+		status.setStatus("approved");
+		request.setDateRes(new Date());
+		request.setIdResolver(user.getId());
+		
+		session.update(status);
+		session.update(request);
+		
+		session.getTransaction().commit();	
+	}
+	
+	public void denyReimbursementRequest(ErsUser user, int requestId) {
+		
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		
+		Reimbursements request = (Reimbursements) session.load(Reimbursements.class, requestId);
+		ReimburseStatus status = (ReimburseStatus) session.load(ReimburseStatus.class, requestId);		
+		
+		status.setStatus("denied");
+		request.setDateRes(new Date());
+		request.setIdResolver(user.getId());
+		
+		session.update(status);
+		session.update(request);
+		
+		session.getTransaction().commit();	
 	}
 
 }

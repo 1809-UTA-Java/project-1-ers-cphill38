@@ -11,29 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.ERSProject.model.ErsUser;
 import com.revature.ERSProject.repository.ReimbursementsDao;
 
-
 @SuppressWarnings("serial")
-@WebServlet("/submitRequest")
-public class SubmitRequestServlet extends HttpServlet {
+@WebServlet("/approveRequest")
+public class ApproveRequestServlet extends HttpServlet {
 	
 	ReimbursementsDao rdao = new ReimbursementsDao();
-	
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ErsUser user = (ErsUser) req.getSession().getAttribute("user");
 		
-		req.getRequestDispatcher("submit-request.html").forward(req, resp);
+		req.getRequestDispatcher("approve.html").forward(req, resp);
 		
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ErsUser user = (ErsUser) req.getSession().getAttribute("user");
+				
+		 Integer requestId = Integer.parseInt(req.getParameter("request"));
+		 rdao.approveReimbursementRequest(user, requestId);		
 		
-		 Integer amount = Integer.parseInt(req.getParameter("amount"));
-		 String desc = req.getParameter("description");
-		
-		rdao.insertReimbursementRequest(user, amount, desc);
-		
-		resp.sendRedirect("employee");
+		 resp.sendRedirect("manager");
 	}
+	
 
 }
