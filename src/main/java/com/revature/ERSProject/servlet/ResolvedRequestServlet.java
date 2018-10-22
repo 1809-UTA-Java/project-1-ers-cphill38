@@ -29,6 +29,15 @@ public class ResolvedRequestServlet extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 		pw.println("<h1>Your Resolved Request</h1><br>" + reimbursements);
 	}
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ErsUser user = (ErsUser) req.getSession().getAttribute("user");
+		reimbursements = rdao.getResolvedReimbursments();
+		
+		resp.setContentType("text/html");
+		PrintWriter pw = resp.getWriter();
+		pw.println("<h1>Resolved Request</h1><br>" + reimbursements);
+	}
 
 }
 

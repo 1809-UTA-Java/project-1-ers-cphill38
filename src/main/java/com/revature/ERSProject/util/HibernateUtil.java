@@ -17,6 +17,8 @@ public class HibernateUtil {
 			config.addAnnotatedClass(ErsUser.class);
 			config.addAnnotatedClass(UserRole.class);
 			config.addAnnotatedClass(Reimbursements.class);
+			config.addAnnotatedClass(ReimburseStatus.class);
+			config.addAnnotatedClass(ReimburseType.class);
 			ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 			
 			return config.buildSessionFactory(sr);

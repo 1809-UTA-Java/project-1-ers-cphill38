@@ -29,5 +29,14 @@ public class PendingRequestsServlet extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 		pw.println("<h1>Your Pending Request</h1><br>" + reimbursements);
 	}
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ErsUser user = (ErsUser) req.getSession().getAttribute("user");
+		reimbursements = rdao.getPendingReimbursments();
+		
+		resp.setContentType("text/html");
+		PrintWriter pw = resp.getWriter();
+		pw.println("<h1>Pending Requests</h1><br>" + reimbursements);
+	}
 
 }
